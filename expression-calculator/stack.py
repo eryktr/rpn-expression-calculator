@@ -6,6 +6,5 @@ class Stack:
     pop = lambda self: self.elements.pop()
     top = lambda self: self.elements[-1]
     empty = lambda self: len(self.elements) == 0
-        
-        
+    
         
