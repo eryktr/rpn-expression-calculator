@@ -2,10 +2,17 @@ from stack import Stack
 from validator import Validator
 class InputParser:        
     
+    def fix_lacking_spaces(self, input):
+        exp = input
+        for operator in Validator.priorities:
+            exp = exp.replace(operator, " " + operator + " ")
+        
+        return exp
+
     def to_rpn(self, input):
         remove_empty_strings = lambda  tokens : [x for x in tokens if x != ""]
-        
-        tokens = remove_empty_strings(input.split(' '))
+        tokens = self.fix_lacking_spaces(input)
+        tokens = remove_empty_strings(tokens.split(' '))
         operator_stack = Stack()
         output = []
         head_priority = lambda : Validator.priority(operator_stack.top())
