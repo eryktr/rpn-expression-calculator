@@ -62,6 +62,16 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(res, 0)
         self.assertEqual(res2, 0)
 
+    def test_can_handle_constants(self):
+        expression = "pi + e"
+        res = self.calculator.calculate(expression)
+        self.assertGreater(res, 5)
+        self.assertLess(res, 6)
+
+        expression2 = "sin(pi)"
+        res2 = self.calculator.calculate(expression2)
+        self.assertAlmostEqual(res2, 0)
+
     if __name__ == '__main__':
         unittest.main()
 

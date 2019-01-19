@@ -19,7 +19,7 @@ class InputParser:
 
         for token in tokens:
             if not(Validator.is_legal(token)) : return "Illegal token"
-            if Validator.is_number(token): output.append(token)
+            if Validator.is_number(token) or Validator.is_const(token): output.append(token)
             
             elif Validator.is_function(token):
                 operator_stack.push(token)
