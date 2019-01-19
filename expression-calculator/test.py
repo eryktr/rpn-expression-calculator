@@ -19,10 +19,26 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(quot, 5)
         self.assertEqual(pow, 1024)
     
+    def test_can_handle_fractions(self):
+        res = self.calculator.calculate("1 / 2")
+        self.assertAlmostEqual(res, 0.5)
+
+    def test_operations_have_correct_priority(self):
+        res = self.calculator.calculate("1 + 2 * 2 + 2 ^ 2 * 2")
+        self.assertEqual(res, 13)
+
     def test_can_calculate_unpadded_expressions(self):
         exp = "(6/2)*(2+1)"
         res = self.calculator.calculate(exp)
         self.assertEqual(res, 9)
+
+    def test_can_handle_strange_braces(self):
+        exp1 = "(2)+(2)"
+        exp2 = "(((((((((( 1 + 1 ))))))))))"
+        res1 = self.calculator.calculate(exp1)
+        res2 = self.calculator.calculate(exp2)
+        self.assertEqual(res1, 4)
+        self.assertEqual(res2, 2)
 
     if __name__ == '__main__':
         unittest.main()
