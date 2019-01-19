@@ -10,7 +10,7 @@ class RPNCalculator:
 
     def to_rpn(self, expression):
         return self.parser.to_rpn(expression)
-    
+        
     def calculate(self, expressioin):
         rpn = self.parser.to_rpn(expressioin)
         return self.processor.evaluate_rpn(rpn)

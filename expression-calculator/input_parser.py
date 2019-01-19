@@ -21,6 +21,9 @@ class InputParser:
             if not(Validator.is_legal(token)) : return "Illegal token"
             if Validator.is_number(token): output.append(token)
             
+            elif Validator.is_function(token):
+                operator_stack.push(token)
+            
             elif Validator.is_operator(token):
                 if Validator.is_open_brace(token) : operator_stack.push(token)
                 

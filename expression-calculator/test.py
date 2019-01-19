@@ -40,6 +40,28 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(res1, 4)
         self.assertEqual(res2, 2)
 
+    def test_can_parse_functions(self):
+        exp1 = "sin(0)"
+        res1 = self.calculator.to_rpn(exp1)
+        self.assertEqual(res1, ["0","sin"])
+
+    def can_calculate_functions(self):
+        exp1 = "sin(0)"
+        exp2 = "3 * cos(0)"
+        res1 = self.calculator.calculate(exp1)
+        res2 = self.calculator.calculate(exp2)
+        self.assertAlmostEqual(exp1, 0)
+        self.assertAlmostEqual(exp2, 3)
+
+    def test_functions_can_have_expression_arguments(self):
+        expressioin = "sin(3 * 0)"
+        res = self.calculator.calculate(expressioin)
+        expression2 = "sin( sin( 0 ) )"
+        res2 = self.calculator.calculate(expression2)
+        
+        self.assertEqual(res, 0)
+        self.assertEqual(res2, 0)
+
     if __name__ == '__main__':
         unittest.main()
 
