@@ -112,3 +112,8 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(res3, 8)
         self.assertEqual(res4, 16)
 
+    def test_can_handle_crazy_expressions(self):
+        exp1 = "xx+2x+1"
+        res = self.calculator.calculate(exp1, 2)
+        self.assertEqual(res, 9)
+
