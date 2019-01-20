@@ -14,7 +14,8 @@ class RPNProcessor:
         'sin' : lambda a : math.sin(a),
         'cos' : lambda a : math.cos(a),
         'tan' : lambda a : math.tan(a),
-        'cot' : lambda a : 1 / math.tan(a)
+        'cot' : lambda a : 1 / math.tan(a),
+        'log' : lambda a : math.log(a)
     }
 
     functions_num_params_map = {
@@ -22,6 +23,7 @@ class RPNProcessor:
             'cos' : 1,
             'tan' : 1,
             'cot' : 1,
+            'log' : 1
     }
 
     num_args = lambda token : RPNProcessor.functions_num_params_map[token]
@@ -34,6 +36,13 @@ class RPNProcessor:
     const_value = lambda const : RPNProcessor.const_value_map[const]
     
     def evaluate_rpn(self, input, value=0):
+        def pop_args(stack, token):
+            args = []
+            for i in range(0, RPNProcessor.num_args(token)):
+                args.append(float(stack.pop()))
+            return args        
+                
+
         number_stack = Stack()
         for token in input:
             if Validator.is_number(token): number_stack.push(token)
@@ -42,10 +51,7 @@ class RPNProcessor:
             elif Validator.is_variable(token) : number_stack.push(value)
             
             elif Validator.is_function(token):    
-                args = []
-                for i in range(0, RPNProcessor.num_args(token)):
-                    args.append(float(number_stack.pop()))
-                    
+                args = pop_args(number_stack, token)
                 res = self.function_map[token](*args)
                 number_stack.push(res)
             

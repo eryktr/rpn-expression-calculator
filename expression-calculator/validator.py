@@ -33,4 +33,5 @@ class Validator:
  
     is_legal = lambda  token : Validator.is_numeric(token) or Validator.is_operator(token) \
                                 or Validator.is_function(token)
+    is_illegal = lambda token : not(Validator.is_legal(token))
     
