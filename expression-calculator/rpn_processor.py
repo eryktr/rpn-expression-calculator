@@ -40,8 +40,16 @@ class RPNProcessor:
             args = []
             for i in range(0, RPNProcessor.num_args(token)):
                 args.append(float(stack.pop()))
-            return args        
-                
+            return args
+
+        def evaluate_function(token, args):
+            return  self.function_map[token](*args)
+
+        def evaluate_operator(stack, token):
+            a = float(stack.pop())
+            b = float(stack.pop())
+            result = RPNProcessor.operator_operation_map[token](a, b)
+            return result
 
         number_stack = Stack()
         for token in input:
@@ -52,14 +60,11 @@ class RPNProcessor:
             
             elif Validator.is_function(token):    
                 args = pop_args(number_stack, token)
-                res = self.function_map[token](*args)
+                res = evaluate_function(token, args)
                 number_stack.push(res)
             
             elif Validator.is_operator(token): 
-                a = float(number_stack.pop())
-                b = float(number_stack.pop())
-                result = RPNProcessor.operator_operation_map[token](a, b)
+                result = evaluate_operator(number_stack, token)
                 number_stack.push(result)
         
         return number_stack.pop()
-
