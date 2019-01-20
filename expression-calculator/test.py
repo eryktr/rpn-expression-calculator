@@ -117,13 +117,20 @@ class TestCalculator(unittest.TestCase):
         exp2 = "pi*e*x"
         exp3 = "sin(sin(sin(sin(pi/2))))"
         exp4 = "log(2)"
+        exp5 = "xsin(x)"
+        exp6 = "xsin(xsin(x))"
         res = self.calculator.calculate(exp1, 2)
         res2 = self.calculator.calculate(exp2, 2)
         res3 = self.calculator.calculate(exp3)
         res4 = self.calculator.calculate(exp4)
+        res5 = self.calculator.calculate(exp5, 2)
+        res6 = self.calculator.calculate(exp6, 2)
+        
         self.assertEqual(res, 9)
         self.assertGreater(res2, 17)
         self.assertLess(res2, 18)
         self.assertGreater(res3, 0.6)
         self.assertLess(res3, 0.7)
         self.assertAlmostEqual(res4, 0.69, 1)
+        self.assertAlmostEqual(res5, 1.81859485365)
+        self.assertAlmostEqual(res6, 1.93890945307)

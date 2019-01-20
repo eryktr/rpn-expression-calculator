@@ -22,8 +22,11 @@ class InputParser:
                 if operator != '(' and operator != ')' : 
                     exp = exp.replace('*'+operator, operator)
                     exp = exp.replace(operator + '*', operator)
+
         if exp.startswith('*') : exp = exp[1:]
         if exp.endswith('*') : exp = exp[:-1]
+        exp = exp.replace('(*', '(')
+        exp = exp.replace('*)', ')')
         return exp
 
     __remove_empty_strings = lambda  self, tokens : [x for x in tokens if x != ""]
@@ -37,6 +40,7 @@ class InputParser:
 
     def to_rpn(self, input):
         tokens = self.__tokenize(input)
+        print(tokens)
         operator_stack = Stack()
         output = []
         head_priority = lambda : Validator.priority(operator_stack.top())
