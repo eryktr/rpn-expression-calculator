@@ -122,6 +122,7 @@ class TestCalculator(unittest.TestCase):
         exp4 = "log(2)"
         exp5 = "xsin(x)"
         exp6 = "xsin(xsin(x))"
+        exp7 = "2*sin(2x*sin(x))"
         
         res = self.calculator.calculate(exp1, 2)
         res2 = self.calculator.calculate(exp2, 2)
@@ -129,6 +130,7 @@ class TestCalculator(unittest.TestCase):
         res4 = self.calculator.calculate(exp4)
         res5 = self.calculator.calculate(exp5, 2)
         res6 = self.calculator.calculate(exp6, 2)
+        res7 = self.calculator.calculate(exp7, 0)
         
         self.assertEqual(res, 9)
         self.assertGreater(res2, 17)
@@ -138,6 +140,7 @@ class TestCalculator(unittest.TestCase):
         self.assertAlmostEqual(res4, 0.69, 1)
         self.assertAlmostEqual(res5, 1.81859485365)
         self.assertAlmostEqual(res6, 1.93890945307)
+        self.assertEqual(res7, 0)
 
     def test_division_by_zero(self):
         exp = "1/0"
