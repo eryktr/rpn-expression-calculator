@@ -1,5 +1,6 @@
 import unittest
 from rpn_calculator import RPNCalculator
+from validator import Validator
 
 class TestCalculator(unittest.TestCase):
 
@@ -77,6 +78,37 @@ class TestCalculator(unittest.TestCase):
         self.calculator.calculate(exp)
         self.assertRaises(ValueError)
 
-    if __name__ == '__main__':
-        unittest.main()
+    def test_can_handle_default_variables(self):
+        exp = "2*x"
+        res = self.calculator.calculate(exp)
+        self.assertEqual(0, res)
+
+    def test_variable_is_numeric(self):
+        self.assertTrue(Validator.is_numeric("x"))
+    
+    def test_variable_is_legal(self):
+        self.assertTrue(Validator.is_legal("x"))    
+
+    def test_variables_put_into_rpn(self):
+        exp = "2*x+1"
+        self.assertEqual(self.calculator.to_rpn(exp), ["2", "x", "*", "1", "+"])
+
+    def test_variables_are_handled(self):
+        exp = "2*x + 7"
+        res = self.calculator.calculate(exp, 1)
+        self.assertEqual(res, 9)
+
+    def test_variables_no_multiplication_operator_handles(self):
+        exp1 = "2x"
+        exp2 = "xx"
+        exp3 = "2xx"
+        exp4 = "2x2x"
+        res1 = self.calculator.calculate(exp1, 1)
+        res2 = self.calculator.calculate(exp2, 2)
+        res3 = self.calculator.calculate(exp3, 2)
+        res4 = self.calculator.calculate(exp4, 2)
+        self.assertEqual(res1, 2)
+        self.assertEqual(res2, 4)
+        self.assertEqual(res3, 8)
+        self.assertEqual(res4, 16)
 

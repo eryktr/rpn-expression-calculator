@@ -33,15 +33,15 @@ class RPNProcessor:
 
     const_value = lambda const : RPNProcessor.const_value_map[const]
     
-    def evaluate_rpn(self, input):
+    def evaluate_rpn(self, input, value=0):
         number_stack = Stack()
         for token in input:
             if Validator.is_number(token): number_stack.push(token)
             
             elif Validator.is_const(token) : number_stack.push(RPNProcessor.const_value(token))
-
-            elif Validator.is_function(token):
-                
+            elif Validator.is_variable(token) : number_stack.push(value)
+            
+            elif Validator.is_function(token):    
                 args = []
                 for i in range(0, RPNProcessor.num_args(token)):
                     args.append(float(number_stack.pop()))

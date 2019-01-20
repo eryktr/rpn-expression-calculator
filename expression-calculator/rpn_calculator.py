@@ -14,9 +14,9 @@ class RPNCalculator:
         except ValueError:
             raise
         
-    def calculate(self, expressioin):
+    def calculate(self, expressioin, value = 0):
         try:
             rpn = self.to_rpn(expressioin)
-            return self.processor.evaluate_rpn(rpn)
+            return self.processor.evaluate_rpn(rpn, value)
         except ValueError:
             print("Your expression is invalid")
