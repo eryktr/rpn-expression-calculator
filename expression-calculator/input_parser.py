@@ -18,7 +18,7 @@ class InputParser:
         head_priority = lambda : Validator.priority(operator_stack.top())
 
         for token in tokens:
-            if not(Validator.is_legal(token)) : return "Illegal token"
+            if not(Validator.is_legal(token)) : raise ValueError()
             if Validator.is_number(token) or Validator.is_const(token): output.append(token)
             
             elif Validator.is_function(token):

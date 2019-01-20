@@ -72,6 +72,11 @@ class TestCalculator(unittest.TestCase):
         res2 = self.calculator.calculate(expression2)
         self.assertAlmostEqual(res2, 0)
 
+    def test_illegal_token_error(self):
+        exp = "2p+7"
+        self.calculator.calculate(exp)
+        self.assertRaises(ValueError)
+
     if __name__ == '__main__':
         unittest.main()
 

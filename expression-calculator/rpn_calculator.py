@@ -9,8 +9,14 @@ class RPNCalculator:
         self.processor = RPNProcessor()
 
     def to_rpn(self, expression):
-        return self.parser.to_rpn(expression)
+        try:
+            return self.parser.to_rpn(expression)
+        except ValueError:
+            raise
         
     def calculate(self, expressioin):
-        rpn = self.parser.to_rpn(expressioin)
-        return self.processor.evaluate_rpn(rpn)
+        try:
+            rpn = self.to_rpn(expressioin)
+            return self.processor.evaluate_rpn(rpn)
+        except ValueError:
+            print("Your expression is invalid")
