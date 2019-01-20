@@ -40,7 +40,6 @@ class InputParser:
 
     def to_rpn(self, input):
         tokens = self.__tokenize(input)
-        print(tokens)
         operator_stack = Stack()
         output = []
         head_priority = lambda : Validator.priority(operator_stack.top())

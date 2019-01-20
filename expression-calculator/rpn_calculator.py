@@ -14,9 +14,14 @@ class RPNCalculator:
         except ValueError:
             raise
         
-    def calculate(self, expressioin, value = 0):
+    def calculate(self, expression, value = 0):
         try:
-            rpn = self.to_rpn(expressioin)
+            rpn = self.to_rpn(expression)
             return self.processor.evaluate_rpn(rpn, value)
         except ValueError:
             print("Your expression is invalid")
+        except ZeroDivisionError:
+            print("Can't divide by zero.")
+    
+    def evaluate(self, expression, value):
+        self.calculate(expression, value)
