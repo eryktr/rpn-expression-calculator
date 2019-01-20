@@ -11,22 +11,21 @@ class RPNProcessor:
     }
 
     function_map = {
-        'sin' : lambda a : math.sin(a),
-        'cos' : lambda a : math.cos(a),
-        'tan' : lambda a : math.tan(a),
-        'cot' : lambda a : 1 / math.tan(a),
-        'log' : lambda a : math.log(a)
+        'sin' :  [lambda a : math.sin(a), 1],
+        'cos' :  [lambda a : math.cos(a), 1],
+        'tan' :  [lambda a : math.cos(a), 1],
+        'cot' :  [lambda a : 1/math.tan(a), 1],
+        'log' :  [lambda a : math.log(a), 1],
+        'asin' : [lambda a : math.asin(a), 1],
+        'acos' : [lambda a : math.acos(a), 1],
+        'atan' : [lambda a : math.atan(a), 1],
+        'sinh' : [lambda a :math.sinh(a), 1],
+        'cosh' : [lambda a :math.cosh(a), 1],
+        'tanh' : [lambda a :math.tanh(a), 1],
+        'abs' :  [lambda a : -a if a < 0 else a, 1]
     }
-
-    functions_num_params_map = {
-            'sin' : 1,
-            'cos' : 1,
-            'tan' : 1,
-            'cot' : 1,
-            'log' : 1
-    }
-
-    num_args = lambda token : RPNProcessor.functions_num_params_map[token]
+    
+    num_args = lambda token : RPNProcessor.function_map[token][1]
 
     const_value_map = {
         'e' : math.e,
@@ -43,7 +42,7 @@ class RPNProcessor:
             return args
 
         def evaluate_function(token, args):
-            return  self.function_map[token](*args)
+            return  self.function_map[token][0](*args)
 
         def evaluate_operator(stack, token):
             a = float(stack.pop())

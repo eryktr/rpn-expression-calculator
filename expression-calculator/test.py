@@ -49,10 +49,13 @@ class TestCalculator(unittest.TestCase):
     def can_calculate_functions(self):
         exp1 = "sin(0)"
         exp2 = "3 * cos(0)"
+        exp3 = "abs(-10)"
         res1 = self.calculator.calculate(exp1)
         res2 = self.calculator.calculate(exp2)
+        res3 = self.calculator.calculate(exp3)
         self.assertAlmostEqual(exp1, 0)
         self.assertAlmostEqual(exp2, 3)
+        self.assertEqual(res3, 10)
 
     def test_functions_can_have_expression_arguments(self):
         expressioin = "sin(3 * 0)"
