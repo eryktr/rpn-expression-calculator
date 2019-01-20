@@ -114,6 +114,16 @@ class TestCalculator(unittest.TestCase):
 
     def test_can_handle_crazy_expressions(self):
         exp1 = "xx+2x+1"
+        exp2 = "pi*e*x"
+        exp3 = "sin(sin(sin(sin(pi/2))))"
+        exp4 = "log(2)"
         res = self.calculator.calculate(exp1, 2)
+        res2 = self.calculator.calculate(exp2, 2)
+        res3 = self.calculator.calculate(exp3)
+        res4 = self.calculator.calculate(exp4)
         self.assertEqual(res, 9)
-
+        self.assertGreater(res2, 17)
+        self.assertLess(res2, 18)
+        self.assertGreater(res3, 0.6)
+        self.assertLess(res3, 0.7)
+        self.assertAlmostEqual(res4, 0.69, 1)
