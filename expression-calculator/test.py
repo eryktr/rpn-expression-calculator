@@ -121,14 +121,20 @@ class TestCalculator(unittest.TestCase):
         exp2 = "2sin(2x)"
         exp3 = "2(2(2(2(2+2))))"
         exp4 = "(2)(2)"
+        exp5 = "pie"
+        exp6 = "(2+2)(2+2)"
         res1 = calc.calculate(exp1)
         res2 = calc.evaluate(exp2, 0)
         res3 = calc.calculate(exp3)
         res4 = calc.calculate(exp4)
+        res5 = calc.calculate(exp5)
+        res6 = calc.calculate(exp6)
         self.assertEqual(res1, 9)
         self.assertEqual(res2, 0)
         self.assertEqual(res3, 64)
         self.assertEqual(res4, 4)
+        self.assertAlmostEqual(res5, 8.53973422267)
+        self.assertEqual(res6, 16)
 
     def test_can_handle_crazy_expressions(self):
         exp1 = "xx+2x+1"
@@ -138,7 +144,7 @@ class TestCalculator(unittest.TestCase):
         exp5 = "xsin(x)"
         exp6 = "xsin(xsin(x))"
         exp7 = "2sin(2xsin(x))"
-        
+ 
         res = self.calculator.calculate(exp1, 2)
         res2 = self.calculator.calculate(exp2, 2)
         res3 = self.calculator.calculate(exp3)
