@@ -137,7 +137,7 @@ class TestCalculator(unittest.TestCase):
         exp4 = "log(2)"
         exp5 = "xsin(x)"
         exp6 = "xsin(xsin(x))"
-        exp7 = "2*sin(2x*sin(x))"
+        exp7 = "2sin(2xsin(x))"
         
         res = self.calculator.calculate(exp1, 2)
         res2 = self.calculator.calculate(exp2, 2)
