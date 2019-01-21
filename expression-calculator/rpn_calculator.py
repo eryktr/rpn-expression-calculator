@@ -24,4 +24,4 @@ class RPNCalculator:
             print("Can't divide by zero.")
     
     def evaluate(self, expression, value):
-        self.calculate(expression, value)
+        return self.calculate(expression, value)

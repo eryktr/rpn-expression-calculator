@@ -11,22 +11,49 @@ class InputParser:
         
         return exp
 
-    def __trim(self, input):
+    def __trim(self, input : str):
         return input.replace(' ', '')
 
     def __add_implicit_operators(self, input : str):
-        exp = input
-        for var in Validator.variables:
-            exp = exp.replace(var, "*"+var+"*")
+        def __add_in_variables(exp : str):
+            ex = exp
+            for var in Validator.variables:
+                ex = ex.replace(var, "*"+var+"*")
+            return ex
+        
+        def __add_in_constants(exp : str):
+            ex = exp
+            for const in Validator.constants:
+                ex = ex.replace(const, '*'+const+'*')
+            return ex
+
+        def __add_in_functions(exp : str):
+            ex = exp
+            for func in Validator.functions:
+                ex = ex.replace(func, "*" + func)
+            return ex
+        
+        def __fix_improper_operators(exp : str):
+            ex = exp
+            ex = exp.replace(")(", ")*(")
             for operator in Validator.priorities:
                 if operator != '(' and operator != ')' : 
-                    exp = exp.replace('*'+operator, operator)
-                    exp = exp.replace(operator + '*', operator)
-
-        if exp.startswith('*') : exp = exp[1:]
-        if exp.endswith('*') : exp = exp[:-1]
-        exp = exp.replace('(*', '(')
-        exp = exp.replace('*)', ')')
+                    ex = ex.replace('*'+operator, operator)
+                    ex = ex.replace(operator + '*', operator)
+            ex = ex.replace('(*', '(')
+            ex = ex.replace('*)', ')')
+            if ex.startswith('*') : ex = ex[1:]
+            if ex.endswith('*') : ex = ex[:-1]
+            for i in range (0,10):
+                ex = ex.replace(str(i)+"(", str(i)+"*(")
+            return ex
+        
+        exp = input
+        exp = __add_in_variables(exp)
+        exp = __add_in_constants(exp)
+        exp = __add_in_functions(exp)
+        exp = __fix_improper_operators(exp)
+        
         return exp
 
     __remove_empty_strings = lambda  self, tokens : [x for x in tokens if x != ""]
@@ -36,6 +63,7 @@ class InputParser:
         tokens = self.__add_implicit_operators(tokens)
         tokens = self.__fix_lacking_spaces(tokens)
         tokens = self.__remove_empty_strings(tokens.split(' '))
+        print(tokens)
         return tokens
 
     def to_rpn(self, input):

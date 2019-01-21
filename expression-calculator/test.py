@@ -115,6 +115,21 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(res3, 8)
         self.assertEqual(res4, 16)
 
+    def test_implicit_multiplications(self):
+        calc = self.calculator
+        exp1 = "(6/2)(2+1)"
+        exp2 = "2sin(2x)"
+        exp3 = "2(2(2(2(2+2))))"
+        exp4 = "(2)(2)"
+        res1 = calc.calculate(exp1)
+        res2 = calc.evaluate(exp2, 0)
+        res3 = calc.calculate(exp3)
+        res4 = calc.calculate(exp4)
+        self.assertEqual(res1, 9)
+        self.assertEqual(res2, 0)
+        self.assertEqual(res3, 64)
+        self.assertEqual(res4, 4)
+
     def test_can_handle_crazy_expressions(self):
         exp1 = "xx+2x+1"
         exp2 = "pi*e*x"
