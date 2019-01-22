@@ -167,3 +167,8 @@ class TestCalculator(unittest.TestCase):
         exp = "1/0"
         res = self.calculator.calculate(exp)
         self.assertRaises(ZeroDivisionError)
+
+    def test_correct_priorities(self):
+        exp = "sin(x)cos(x)"
+        res = self.calculator.evaluate(exp, 0)
+        self.assertEqual(res, 0)
