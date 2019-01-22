@@ -35,6 +35,7 @@ class RPNProcessor:
     const_value = lambda const : RPNProcessor.const_value_map[const]
     
     def evaluate_rpn(self, input, value=0):
+        
         def pop_args(stack, token):
             args = []
             for i in range(0, RPNProcessor.num_args(token)):
