@@ -10,7 +10,7 @@ class Validator:
         '(' : -100,
         ')' : -100
     }
-    priority = lambda value : Validator.priorities.get(value, 0)
+    priority = lambda value : Validator.priorities.get(value, 100)
     is_operator = lambda token : token in Validator.priorities
     is_open_brace = lambda token : token == '('
     is_close_brace = lambda token : token == ')'

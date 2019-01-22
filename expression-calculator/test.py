@@ -172,3 +172,5 @@ class TestCalculator(unittest.TestCase):
         exp = "sin(x)cos(x)"
         res = self.calculator.evaluate(exp, 0)
         self.assertEqual(res, 0)
+
+

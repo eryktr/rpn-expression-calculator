@@ -63,6 +63,7 @@ class InputParser:
         tokens = self.__add_implicit_operators(tokens)
         tokens = self.__fix_lacking_spaces(tokens)
         tokens = self.__remove_empty_strings(tokens.split(' '))
+        print(tokens)
         return tokens
 
     def to_rpn(self, input):
