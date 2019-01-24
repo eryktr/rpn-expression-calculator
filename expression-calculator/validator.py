@@ -32,7 +32,7 @@ class Validator:
     def is_variable(token):
         return token in Validator.variables
 
-    functions = {'sin', 'cos', 'tan', 'cot', 'log'}
+    functions = {'sin', 'cos', 'tan', 'cot', 'log', 'asin', 'acos', 'atan', 'sinh', 'cosh', 'tanh', 'abs'}
 
     @staticmethod
     def is_function(token):
