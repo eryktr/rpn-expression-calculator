@@ -11,9 +11,6 @@ class InputParser:
         
         return exp
 
-    def __trim(self, input : str):
-        return input.replace(' ', '')
-
     def __add_implicit_operators(self, input : str):
         def __add_in_variables(exp : str):
             ex = exp
@@ -58,8 +55,8 @@ class InputParser:
 
     __remove_empty_strings = lambda  self, tokens : [x for x in tokens if x != ""]
 
-    def __tokenize(self, input): 
-        tokens = self.__trim(input)
+    def __tokenize(self, input : str):
+        tokens = input.replace(" ", "")
         tokens = self.__add_implicit_operators(tokens)
         tokens = self.__fix_lacking_spaces(tokens)
         tokens = self.__remove_empty_strings(tokens.split(' '))

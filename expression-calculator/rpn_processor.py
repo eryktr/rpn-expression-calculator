@@ -1,6 +1,7 @@
 import math
 from stack import Stack
 from validator import Validator
+
 class RPNProcessor:
     operator_operation_map = {
         '+' : lambda a, b : b + a,
