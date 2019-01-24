@@ -1,10 +1,19 @@
 class Stack:
     def __init__(self):
         self.elements = []
-    
-    push = lambda self, value : self.elements.append(value)
-    pop = lambda self: self.elements.pop()
-    top = lambda self: self.elements[-1]
-    empty = lambda self: len(self.elements) == 0
-    not_empty = lambda self : not(self.empty())
-        
+
+    def push(self, value):
+        self.elements.append(value)
+
+    def pop(self):
+        return self.elements.pop()
+
+    def top(self):
+        return self.elements[-1]
+
+    def empty(self):
+        return len(self.elements) == 0
+
+    def not_empty(self):
+        return not(self.empty())
+
