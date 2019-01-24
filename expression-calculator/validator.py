@@ -1,37 +1,68 @@
 class Validator:
-
     priorities = {
-        '+' : 1,
-        '-' : 1,
-         '*' : 2,
-        '/' : 2,
-        '%' : 2,
-        '^' : 3,
-        '(' : -100,
-        ')' : -100
+        '+': 1,
+        '-': 1,
+        '*': 2,
+        '/': 2,
+        '%': 2,
+        '^': 3,
+        '(': -100,
+        ')': -100
     }
-    priority = lambda value : Validator.priorities.get(value, 100)
-    is_operator = lambda token : token in Validator.priorities
-    is_open_brace = lambda token : token == '('
-    is_close_brace = lambda token : token == ')'
-    
+
+    @staticmethod
+    def priority(value):
+        return Validator.priorities.get(value, 100)
+
+    @staticmethod
+    def is_operator(token):
+        return token in Validator.priorities
+
+    @staticmethod
+    def is_open_brace(token):
+        return token == '('
+
+    @staticmethod
+    def is_close_brace(token):
+        return token == ')'
+
     variables = {'x'}
-    is_variable = lambda token : token in Validator.variables
+
+    @staticmethod
+    def is_variable(token):
+        return token in Validator.variables
 
     functions = {'sin', 'cos', 'tan', 'cot', 'log'}
-    is_function = lambda token : token in Validator.functions
+
+    @staticmethod
+    def is_function(token):
+        return token in Validator.functions
 
     constants = {"pi", "e"}
-    is_const = lambda token : token in Validator.constants
 
-    is_numeric = lambda token : Validator.is_number(token) or Validator.is_const(token) \
-                                or Validator.is_variable(token)
+    @staticmethod
+    def is_const(token):
+        return token in Validator.constants
 
+    @staticmethod
+    def is_numeric(token):
+        return Validator.is_number(token) \
+               or Validator.is_const(token) \
+               or Validator.is_variable(token)
+
+    @staticmethod
     def is_number(token):
-            try: int(token); return True
-            except: return False
- 
-    is_legal = lambda  token : Validator.is_numeric(token) or Validator.is_operator(token) \
-                                or Validator.is_function(token)
-    is_illegal = lambda token : not(Validator.is_legal(token))
-    
+        try:
+            int(token); return True
+        except:
+            return False
+
+    @staticmethod
+    def is_legal(token):
+        return Validator.is_numeric(token) \
+            or Validator.is_operator(token) \
+            or Validator.is_function(token)
+
+    @staticmethod
+    def is_illegal(token):
+        return not (Validator.is_legal(token))
